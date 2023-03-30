@@ -1,0 +1,145 @@
+{% extends "identity/base.html" %}
+{% block title %}
+{% endblock %}
+{% load static %}
+{% block navlinks %}
+{% endblock %}
+{% block mainbody %}
+<div class="navbar bg-base-100">
+  <div class="flex-1">
+    <a href="{% url 'index' %}" class="btn btn-ghost normal-case text-xl">SHA-256</a>
+  </div>
+  <div class="flex-none">
+    <ul class="menu menu-horizontal px-1">
+      <li><a href="{% url 'encode' %}">Encode</a></li>
+      <li><a class="bg-primary-content text-primary">Decode</a></li>
+      <li tabindex="0">
+        <a>
+          About Us
+          <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
+        </a>
+        <ul class="p-2 bg-base-100 z-50">
+          <li><a href="#cecilia">Cecilia</a></li>
+          <div class="modal" id="cecilia">
+              <div class="modal-box">
+                <h3 class="font-bold text-lg">Cecilia Nganga</h3>
+                <p class="py-4">Registration Number: 2x/xxxxx</p>
+                <div class="modal-action">
+                 <a href="#" class="btn">Close</a>
+                </div>
+              </div>
+          </div>
+          <li><a href="#chacha">Chacha</a></li>
+          <div class="modal" id="chacha">
+              <div class="modal-box">
+                <h3 class="font-bold text-lg">Dismas Chacha</h3>
+                <p class="py-4">Registration Number: 2x/xxxxx</p>
+                <div class="modal-action">
+                 <a href="#" class="btn">Close</a>
+                </div>
+              </div>
+          </div>
+          <li><a href="#jackson">Jackson</a></li>
+          <div class="modal" id="jackson">
+              <div class="modal-box">
+                <h3 class="font-bold text-lg">Jackson Ngotho</h3>
+                <p class="py-4">Registration Number: 2x/xxxxx</p>
+                <div class="modal-action">
+                 <a href="#" class="btn">Close</a>
+                </div>
+              </div>
+          </div>
+          <li><a href="#maggie">Maggie</a></li>
+          <div class="modal" id="maggie">
+              <div class="modal-box">
+                <h3 class="font-bold text-lg">Maggie Nduta</h3>
+                <p class="py-4">Registration Number: 2x/xxxxx</p>
+                <div class="modal-action">
+                 <a href="#" class="btn">Close</a>
+                </div>
+              </div>
+          </div>
+          <li><a href="#naomi">Naomi</a></li>
+          <div class="modal" id="naomi">
+              <div class="modal-box">
+                <h3 class="font-bold text-lg">Naomi Kerry</h3>
+                <p class="py-4">Registration Number: 2x/xxxxx</p>
+                <div class="modal-action">
+                 <a href="#" class="btn">Close</a>
+                </div>
+              </div>
+          </div>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+  
+<div class="hero min-h-screen bg-base-200">
+  <div class="hero-content flex-col lg:flex-row-reverse">
+      <div class="text-center lg:text-left">
+          <h1 class="text-5xl font-bold">Verification</h1>
+          <p class="py-6">The form provided collects various data elements from a user, which are subsequently utilized to create a unique digital identity. This process is an integral part of digital identity management, which aims to ensure the secure and accurate identification of individuals in the digital world. <br> <br>Through the utilization of this information, a fixed-length hash value is generated, which serves as the public key for the user. Additionally, a corresponding private key is created, enabling decryption of the aforementioned public key. <br> <br>This process ensures secure transmission and storage of sensitive data, thereby mitigating the risk of unauthorized access or malicious tampering. Effective digital identity management practices are essential in safeguarding sensitive information and protecting against identity theft, data breaches, and other forms of cybercrime.</p>
+      </div>
+
+      <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+        <div class="card-body">
+
+          <h2 class="text-lg font-bold mb-2">Verification</h2>
+          <form method="post" action="{% url 'decode' %}">
+            {% csrf_token %}
+
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Encrypted Data</span>
+              </label>
+              <textarea name="encrypted_data" class="input input-bordered" placeholder="Enter the Public Key here"></textarea>
+            </div>
+
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Private Key</span>
+              </label>
+              <input type="password" name="private_key" placeholder="Enter your private key" class="input input-bordered" />
+            </div>
+
+            <div class="form-control mt-6">
+              <button class="btn btn-primary" type="submit">Verify</button>
+            </div>
+          </form>
+
+
+          {% if verified %}
+          <div class="form-control mt-6">
+            <label class="label">
+              <span class="label-text">Verification Status</span>
+            </label>
+            <div class="alert alert-success shadow-lg">
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>You have been verified!</span>
+              </div>
+            </div>
+          </div>
+          {% else %}
+          <div class="form-control mt-6">
+            <label class="label">
+              <span class="label-text">Verification Status</span>
+            </label>
+            <div class="alert alert-error shadow-lg">
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Error! Not verified.</span>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+    
+        </div>
+      </div>
+          
+    
+      
+  </div>
+</div>
+{% endblock %}

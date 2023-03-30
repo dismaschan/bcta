@@ -1,0 +1,140 @@
+{% extends "identity/base.html" %}
+{% block title %}
+{% endblock %}
+{% load static %}
+{% block navlinks %}
+{% endblock %}
+{% block mainbody %}
+<div class="navbar bg-base-100">
+    <div class="flex-1">
+      <a href="{% url 'index' %}" class="btn btn-ghost normal-case text-xl">SHA-256</a>
+    </div>
+    <div class="flex-none">
+      <ul class="menu menu-horizontal px-1">
+        <li><a class="bg-primary-content text-primary">Encode</a></li>
+        <li><a href="{% url 'decode' %}">Decode</a></li>
+        <li tabindex="0">
+          <a>
+            About Us
+            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
+          </a>
+          <ul class="p-2 bg-base-100 z-50">
+            <li><a href="#cecilia">Cecilia</a></li>
+            <div class="modal" id="cecilia">
+                <div class="modal-box">
+                  <h3 class="font-bold text-lg">Cecilia Nganga</h3>
+                  <p class="py-4">Registration Number: 2x/xxxxx</p>
+                  <div class="modal-action">
+                   <a href="#" class="btn">Close</a>
+                  </div>
+                </div>
+            </div>
+            <li><a href="#chacha">Chacha</a></li>
+            <div class="modal" id="chacha">
+                <div class="modal-box">
+                  <h3 class="font-bold text-lg">Dismas Chacha</h3>
+                  <p class="py-4">Registration Number: 2x/xxxxx</p>
+                  <div class="modal-action">
+                   <a href="#" class="btn">Close</a>
+                  </div>
+                </div>
+            </div>
+            <li><a href="#jackson">Jackson</a></li>
+            <div class="modal" id="jackson">
+                <div class="modal-box">
+                  <h3 class="font-bold text-lg">Jackson Ngotho</h3>
+                  <p class="py-4">Registration Number: 2x/xxxxx</p>
+                  <div class="modal-action">
+                   <a href="#" class="btn">Close</a>
+                  </div>
+                </div>
+            </div>
+            <li><a href="#maggie">Maggie</a></li>
+            <div class="modal" id="maggie">
+                <div class="modal-box">
+                  <h3 class="font-bold text-lg">Maggie Nduta</h3>
+                  <p class="py-4">Registration Number: 2x/xxxxx</p>
+                  <div class="modal-action">
+                   <a href="#" class="btn">Close</a>
+                  </div>
+                </div>
+            </div>
+            <li><a href="#naomi">Naomi</a></li>
+            <div class="modal" id="naomi">
+                <div class="modal-box">
+                  <h3 class="font-bold text-lg">Naomi Kerry</h3>
+                  <p class="py-4">Registration Number: 2x/xxxxx</p>
+                  <div class="modal-action">
+                   <a href="#" class="btn">Close</a>
+                  </div>
+                </div>
+            </div>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+<div class="hero min-h-screen bg-base-200">
+    <div class="hero-content flex-col lg:flex-row-reverse">
+        <div class="text-center lg:text-left">
+            <h1 class="text-5xl font-bold">Encryption</h1>
+            <p class="py-6">The form provided collects various data elements from a user, which are subsequently utilized to create a unique digital identity. This process is an integral part of digital identity management, which aims to ensure the secure and accurate identification of individuals in the digital world. <br> <br>Through the utilization of this information, a fixed-length hash value is generated, which serves as the public key for the user. Additionally, a corresponding private key is created, enabling decryption of the aforementioned public key. <br> <br>This process ensures secure transmission and storage of sensitive data, thereby mitigating the risk of unauthorized access or malicious tampering. Effective digital identity management practices are essential in safeguarding sensitive information and protecting against identity theft, data breaches, and other forms of cybercrime.</p>
+        </div>
+
+        <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <div class="card-body">
+        
+                <form method="post" action="{% url 'encode' %}">
+                    {% csrf_token %}
+        
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">First Name</span>
+                        </label>
+                        <input type="text" name="first_name" placeholder="Firstname" class="input input-bordered" required />
+                    </div>
+        
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Last Name</span>
+                        </label>
+                        <input type="text" name="last_name" placeholder="Lastname" class="input input-bordered" required />
+                    </div>
+        
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Email</span>
+                        </label>
+                        <input type="email" name="email" placeholder="email" class="input input-bordered" required />
+                    </div>
+        
+                    <div class="form-control mt-6">
+                        <button type="submit" name="submit" value="submit" class="btn btn-primary">Encrypt</button>
+                    </div>
+        
+                </form>
+        
+                {% if encrypted %}
+                <div class="form-control mt-6">
+                    <label class="label">
+                        <span class="label-text">Encrypted Data (Public Key)</span>
+                    </label>
+                    <textarea class="textarea textarea-bordered" readonly>{{ encrypted }}</textarea>
+                </div>
+                
+                <div class="form-control mt-6">
+                    <label class="label">
+                        <span class="label-text">Private Key</span>
+                    </label>
+                    <textarea class="textarea textarea-bordered" readonly>{{ private }}</textarea>
+                </div>
+            
+                {% endif %}
+        
+            </div>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

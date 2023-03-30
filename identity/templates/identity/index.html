@@ -1,0 +1,20 @@
+{% extends "identity/base.html" %}
+{% block title %}
+{% endblock %}
+{% load static %}
+{% block navlinks %}
+{% endblock %}
+{% block mainbody %}
+<div data-theme="luxury" class="hero min-h-screen" style="background-image: url(https://www.kcau.ac.ke/wp-content/uploads/2020/04/front-view-of-KCA-University.jpg);">
+    <div class="hero-overlay bg-opacity-60"></div>
+    <div class="hero-content text-center text-neutral-content">
+      <div class="max-w-md">
+        <h1 class="mb-5 text-5xl font-bold">Hello there</h1>
+        <p class="mb-5 text-yellow-400">This project was developed by Cecilia, Chacha, Jackson, Maggie, and Naomi. The team worked collaboratively to create a simple but effective demonstration of the SHA-256 hashing algorithm. The SHA-256 hashing algorithm is a widely used method of encryption that converts any input data into a fixed-length string of characters, known as a hash. This hash is unique to the input data, which makes it a valuable tool in the field of cybersecurity.</p>
+        <button class="btn btn-primary">
+          <a href="{% url 'encode' %}">Get Started</a>
+        </button>
+      </div>
+    </div>
+  </div>
+{% endblock %}
