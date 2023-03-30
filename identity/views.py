@@ -52,11 +52,11 @@ def decode(request):
 
         if pk2_hex == private_key_hex:
             # Hash verification succeeded
-            verification_result = True
+            verified = True
+            return render(request, "identity/decode.html", {'verified': verified})
         else:
             # Hash verification failed
-            verification_result = False
-
-        return render(request, "identity/decode.html", {'verified': verification_result})
+            unverified = True
+            return render(request, "identity/decode.html", {"unverified":unverified})
 
     return render(request, "identity/decode.html")
